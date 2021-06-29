@@ -8,72 +8,41 @@
 -->
 <template>
   <div class="home">
-    <!-- <img src="../assets/logo.png" alt="Vue log" class="logo" /> -->
-    <router-link to="/" class="logo" />
-    <el-menu
-      :default-active="current"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <el-menu-item index="0">首页</el-menu-item>
-      <el-menu-item index="1" @click="handleJumpToFav">我的收藏</el-menu-item>
-      <el-menu-item index="2">我的关注</el-menu-item>
-      <el-menu-item index="3">供应商库</el-menu-item>
-    </el-menu>
-    <detail/>
+    <Header><div slot="left">供应商作品</div></Header>
+    <!-- <detail /> -->
+    <search />
+    <WorkType></WorkType>
+    <div class="work-list">
+      <Presentation></Presentation>
+    </div>
+    <Pagination></Pagination>
   </div>
 </template>
 <script>
-import Detail from './childComps/Detail.vue'
-const paths = ["/", "/fav", "/att", "/gysk"];
+import Header from "../../components/contents/Header.vue";
+import Detail from "./childComps/Detail.vue";
+import Search from "../../components/common/Search.vue";
+import WorkType from "./childComps/WorkTypeOption.vue";
+import Presentation from "./childComps/Presentation.vue";
+import Pagination from "../../components/common/Pagination.vue"
 export default {
   name: "Home",
   data: () => ({}),
   components: {
-    Detail
-  },
-  computed: {
-    current() {
-      let index;
-      for (index = 0; index < paths.length; index++) {
-        const path = paths[index];
-        let reg = new RegExp("^" + path);
-        if (this.$route.path.match(reg)) {
-          break;
-        }
-      }
-      console.log(index + "");
-      return index + "";
-    },
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      let path = paths[key];
-      if (this.$route.path !== path) {
-        this.$router.push({ path: path });
-      }
-    },
-    sendUrl() {
-
-    },
-    handleJumpToFav() {
-      this.$router.push('/favorable');
-    }
-  },
+    Header,
+    Detail,
+    Search,
+    WorkType,
+    Presentation,
+    Pagination
+  }
 };
 </script>
 
 <style scoped>
-.logo {
-  width: 100%;
-  height: 40px;
-  display: inline-block;
-  background: url("../../assets/logo.png") center center no-repeat;
-  background-size: contain;
-}
-.el-menu-demo {
-  justify-content: center;
+.work-list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 </style>

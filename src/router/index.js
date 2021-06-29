@@ -14,6 +14,8 @@ import Router from 'vue-router'
 
 import Home from '../views/Home'
 import Favorable from '../views/Favorable'
+import Att from '../views/Att'
+import Gysk from '../views/Gysk'
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +32,14 @@ export default new Router({
       path: '/favorable',
       component: Favorable,
     },
+    {
+      path: '/att',
+      component: Att,
+    },
+    {
+      path: '/gysk',
+      component: Gysk,
+    }
   ],
 
   mode: 'history'
